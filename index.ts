@@ -1,13 +1,20 @@
-import { Router } from '@stricjs/router'
-import { dir } from '@stricjs/utils'
 import crypto from 'crypto'
 
 const SECRET = crypto.randomBytes(32).toString('hex')
 const IP = Bun.env.IP || 'Change with your ISP IP (Step one in README.md)'
 
-export default new Router()
-  .get('/', () => new Response('Hi'))
-  .get(`/${SECRET}/*`, dir('./files'))
+Bun.serve({
+  fetch(req) {
+    const url = new URL(req.url)
+    if (url.pathname === '/') return new Response('Hi')
+    if (url.pathname.includes(SECRET)) {
+      const filename = url.pathname.replace(`/${SECRET}/`, '')
+      const file = Bun.file('./files/' + filename)
+      return new Response(file)
+    }
+    return new Response('404!')
+  },
+})
 
 console.log(`
   Link to file you want ot share will be:

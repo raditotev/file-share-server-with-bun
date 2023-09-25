@@ -1,21 +1,17 @@
 {
   "name": "file-share-server-with-bun",
-  "description": "Simple static file server for sharing files without the use of cloud service providers.",
   "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "start": "bun run index.ts",
-    "dev": "bun --watch run index.ts",
-    "postinstall": "mkdir -p files && echo 'IP=localhost' > .env && echo 'PORT=8008' >> .env"
-  },
   "devDependencies": {
     "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "dependencies": {
-    "@stricjs/router": "^4.2.2",
-    "@stricjs/utils": "^1.5.3"
-  }
+  "description": "Simple Bun static file server for sharing files without the use of cloud service providers.",
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "bun --watch run index.ts",
+    "postinstall": "mkdir -p files && echo 'IP=localhost' > .env && echo 'PORT=8008' >> .env"
+  },
+  "type": "module"
 }
